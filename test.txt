@@ -1,0 +1,38 @@
+//LenguajeUno
+# include < iostream >
+using namespace std ;
+
+float potencia( int x, float n ) {
+	int i = 0 ;
+	float pot = 1.0 ;
+	
+	if ( n > 0 ) {
+		while ( i < n ) {
+			pot =  pot * x ;
+			i = i + 1 ;
+		}
+	} else {
+		while ( 0 > n ) {
+			pot = pot * 1.0 / x ;
+			n = n + 1 ;
+		}
+	}
+	return pot ;
+}
+
+//LenguajeDos
+< head >
+< script type = text / javascript >
+function setfocus ( )
+   {
+   }
+   < / script >
+< / head >
+
+#LenguajeTres
+while x < 9
+if x % 2 = = 0 :
+print( x )
+break
+print( x )
+x + = 1
