@@ -1,0 +1,47 @@
+body{
+    font-family: "fantasy";
+    font-size: 18px;
+    font-weight: 500;
+    color: whitesmoke;
+    background-color: #252526;
+}
+
+/* Rosa */
+.reservada{
+    color: rgb(232, 66, 232);
+}
+
+/* Naranja Claro */
+.integer{
+    color: rgb(255, 203, 112);
+}
+
+/* Naranja Claro */
+.decimal{
+    color: rgb(255, 203, 112);
+}
+
+/* Naranja */
+.operador{
+    color: rgb(246, 135, 0);
+}
+
+/* Azul */
+.identificador{
+    color: rgb(37, 124, 217)
+}
+
+/* Amarillo */
+.delimitadorFuncion{
+    color: rgb(245, 255, 61);
+}
+
+/* Gris */
+.comment{
+    color: grey;
+}
+
+/* Gris */
+.commentdos{
+    color: grey;
+}
