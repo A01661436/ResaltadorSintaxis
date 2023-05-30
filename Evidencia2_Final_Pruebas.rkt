@@ -20,7 +20,7 @@
   (lambda (palabra)
       (cond
           [(empty? palabra) #f]
-          [(regexp-match-exact? #rx"[+][=]|\"\"?|[']|[[][]]|[{][}]|[(][)]|[=][!]|[>][=]|[<][=]|[<][>]|[=][=]|[|][|]|[&][&]|[<]|[>]|[$]|[(]|[)]|[{]|[}]|[[]|[]]|[&]|[|]|[,]|[:]|[;]|[+][+]|[-][-]|[*][*]|[+]|[-]|[*]|[/]|[%]|[!]|[=]|&lt|&gt|&lt{1}|&gt&gt|&lt=|&gt=" palabra) #t]
+          [(regexp-match-exact? #rx"[+][=]|\"\"?|[']|[[][]]|[{][}]|[(][)]|[=][!]|[>][=]|[<][=]|[<][>]|[=][=]|[|][|]|[&][&]|[<]|[>]|[$]|[(]|[)]|[{]|[}]|[[]|[]]|[&]|[|]|[,]|[:]|[;]|[+][+]|[-][-]|[][]|[+]|[-]|[*]|[/]|[%]|[!]|[=]|&lt|&gt|&lt{1}|&gt&gt|&lt=|&gt=" palabra) #t]
           [else #f])))
 
 (define is-identificador?
@@ -66,7 +66,7 @@
 (define (resaltar_linea linea)
   (define resaltada
     (regexp-replace* #rx"[0-9]+" linea 
-                     (lambda (match) (string-append "<span class='decimal'>" match "</span>"))))
+                     (lambda (match) (string-append " " match " "))))
   (define (aux chars token result)
     (cond
       [(null? chars) (string-append result (resaltar_token token))]
@@ -90,8 +90,12 @@
   (generar-archivo-de-salida lineas filename)) ; Genera el archivo de salida con las líneas resaltadas
 
 
-(define files '("p4.txt" "p2.txt" "p3.txt" "p1.txt")) ; Lista de nombres de archivos de entrada a procesar
+(define (tiempo-ejecucion)
+  (let ([inicio (current-inexact-milliseconds)])
+    (define files '("p1.txt" "p2.txt" "p3.txt" "p4.txt")) 
+    (define threads (map (lambda (f) (thread (lambda () (procesar-archivo f)))) files)) 
+    (map thread-wait threads) 
+    (let ([final (current-inexact-milliseconds)]) 
+      (- final inicio))))
 
-(define threads (map (lambda (f) (thread (lambda () (procesar-archivo f)))) files)) ; Crea un hilo para procesar cada archivo de entrada en paralelo
-
-(map thread-wait threads) ; Espera a que todos los hilos terminen su ejecución
+(display (string-append "El tiempo de ejecución fue: " (number->string (tiempo-ejecucion)) " ms"))
